@@ -1,0 +1,38 @@
+---
+title: "New Post"
+author: "Wonjun Choi"
+date: "2023-03-14"
+categories: [news, code, analysis]
+image: "image.jpg"
+---
+
+This is a post for test.
+
+matplotlib을 활용한 scatter plot 예제
+
+```{python}
+%matplotlib inline
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 데이터 생성
+x = np.random.rand(50)
+y = np.random.rand(50)
+colors = np.random.rand(50)
+sizes = 1000 * np.random.rand(50)
+
+# scatter plot 그리기
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.5)
+
+# 축 라벨 설정
+plt.xlabel('X label')
+plt.ylabel('Y label')
+
+# 그래프 타이틀 설정
+plt.title('Scatter plot example')
+
+# 그래프 출력
+plt.show()
+
+```
