@@ -4,13 +4,10 @@ image: profile.jpg
 about:
   template: jolla
   links:
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com
     - icon: github
       text: Github
       href: https://github.com/1-wjc
 
 ---
 
-This blog is for HNU 23-1 Data Mining.
+HNU 23-1 Data Mining
