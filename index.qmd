@@ -4,6 +4,7 @@ listing:
   contents: posts
   sort: "date desc"
   type: default
+  fields: [image, date, title, categories, author]
   categories: true
   sort-ui: true
   filter-ui: true
