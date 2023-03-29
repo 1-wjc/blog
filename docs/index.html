@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-date','listing-title','listing-categories','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Advanced R">Advanced R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="open data analysis">open data analysis <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Advanced R">Advanced R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data mining">data mining <span class="quarto-category-count">(2)</span></div><div class="category" data-category="open data analysis">open data analysis <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -159,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
@@ -185,49 +185,54 @@ ul.task-list li input[type="checkbox"] {
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1680072941767" data-listing-reading-time-sort="0">
-<a href="./posts/numpy/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-img-bg" style="height: 150px;">
-&nbsp;
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Python,data mining" data-listing-date-sort="1679324400000" data-listing-file-modified-sort="1680074142757" data-listing-reading-time-sort="0.005">
+<div class="thumbnail">
+<p><a href="./posts/Pandas/index.html"> <img src="./posts/Pandas/pandas.png" class="thumnail-image"> </a></p>
 </div>
-<div class="card-body post-contents">
-<div class="card-attribution card-text-small start">
+<div class="body">
+<a href="./posts/Pandas/index.html">
+<h3 class="no-anchor listing-title">
+pandas
+</h3>
+<div class="listing-subtitle">
+Data Mining basic02
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data mining'); return false;">
+data mining
+</div>
+</div>
+<a href="./posts/Pandas/index.html"> </a>
+</div>
+<div class="metadata">
+<a href="./posts/Pandas/index.html">
+<div class="listing-date">
+Mar 21, 2023
+</div>
 <div class="listing-author">
-
-</div>
-</div>
-</div>
+Wonjun Choi
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1680072948145" data-listing-reading-time-sort="0">
-<a href="./posts/pandas/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-img-bg" style="height: 150px;">
-&nbsp;
 </div>
-<div class="card-body post-contents">
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
+<div class="quarto-post image-right" data-index="1" data-categories="R,Advanced R" data-listing-date-sort="1679238000000" data-listing-file-modified-sort="1680073343442" data-listing-reading-time-sort="0.005">
+<div class="thumbnail">
+<p><a href="./posts/R_basic/index.html"> <img src="./posts/R_basic/rstudio.png" class="thumnail-image"> </a></p>
 </div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="R,Advanced R" data-listing-date-sort="1679238000000" data-listing-file-modified-sort="1680073343442" data-listing-reading-time-sort="0.005">
-<a href="./posts/R_basic/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./posts/R_basic/rstudio.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
+<div class="body">
+<a href="./posts/R_basic/index.html">
+<h3 class="no-anchor listing-title">
 R basic
-</h5>
+</h3>
+<div class="listing-subtitle">
+Advanced R basic
+</div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
 R
@@ -236,55 +241,63 @@ R
 Advanced R
 </div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Wonjun Choi
+<a href="./posts/R_basic/index.html"> </a>
 </div>
+<div class="metadata">
+<a href="./posts/R_basic/index.html">
 <div class="listing-date">
 Mar 20, 2023
 </div>
-</div>
-</div>
+<div class="listing-author">
+Wonjun Choi
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="code" data-listing-date-sort="1678719600000" data-listing-file-modified-sort="1680070728282" data-listing-reading-time-sort="0.23">
-<a href="./posts/test_post/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./posts/test_post/image.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="code" data-listing-date-sort="1678719600000" data-listing-file-modified-sort="1680070728282" data-listing-reading-time-sort="0.23">
+<div class="thumbnail">
+<p><a href="./posts/test_post/index.html"> <img src="./posts/test_post/image.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/test_post/index.html">
+<h3 class="no-anchor listing-title">
 Test Post
-</h5>
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
 </div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Wonjun Choi
+<a href="./posts/test_post/index.html"> </a>
 </div>
+<div class="metadata">
+<a href="./posts/test_post/index.html">
 <div class="listing-date">
 Mar 14, 2023
 </div>
-</div>
-</div>
+<div class="listing-author">
+Wonjun Choi
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="open data analysis,R" data-listing-date-sort="1678374000000" data-listing-file-modified-sort="1680071361072" data-listing-reading-time-sort="3.975">
-<a href="./posts/Managing_data_with_tidyverse/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./posts/Managing_data_with_tidyverse/tidyverse.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="open data analysis,R" data-listing-date-sort="1678374000000" data-listing-file-modified-sort="1680071361072" data-listing-reading-time-sort="3.975">
+<div class="thumbnail">
+<p><a href="./posts/Managing_data_with_tidyverse/index.html"> <img src="./posts/Managing_data_with_tidyverse/tidyverse.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Managing_data_with_tidyverse/index.html">
+<h3 class="no-anchor listing-title">
 Managing data with tidyverse
-</h5>
+</h3>
+<div class="listing-subtitle">
+Open Data Analysis ch02
+</div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('open data analysis'); return false;">
 open data analysis
@@ -293,17 +306,52 @@ open data analysis
 R
 </div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Wonjun Choi
+<a href="./posts/Managing_data_with_tidyverse/index.html"> </a>
 </div>
+<div class="metadata">
+<a href="./posts/Managing_data_with_tidyverse/index.html">
 <div class="listing-date">
 Mar 10, 2023
 </div>
-</div>
-</div>
+<div class="listing-author">
+Wonjun Choi
 </div>
 </a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="Python,data mining" data-listing-date-sort="1678114800000" data-listing-file-modified-sort="1680074097325" data-listing-reading-time-sort="0.005">
+<div class="thumbnail">
+<p><a href="./posts/Numpy/index.html"> <img src="./posts/Numpy/numpy.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Numpy/index.html">
+<h3 class="no-anchor listing-title">
+numpy
+</h3>
+<div class="listing-subtitle">
+Data Mining basic01
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data mining'); return false;">
+data mining
+</div>
+</div>
+<a href="./posts/Numpy/index.html"> </a>
+</div>
+<div class="metadata">
+<a href="./posts/Numpy/index.html">
+<div class="listing-date">
+Mar 7, 2023
+</div>
+<div class="listing-author">
+Wonjun Choi
+</div>
+</a>
+</div>
 </div>
 </div>
 <div class="listing-no-matching d-none">

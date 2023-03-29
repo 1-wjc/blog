@@ -31,5 +31,11 @@
   },
   "posts/R_basic/index.qmd": {
     "index.html": "1e799434"
+  },
+  "posts/Numpy/index.qmd": {
+    "index.html": "1396702a"
+  },
+  "posts/Pandas/index.qmd": {
+    "index.html": "00947862"
   }
 }

@@ -3,7 +3,7 @@ title: "Data Analyze blog"
 listing:
   contents: posts
   sort: "date desc"
-  type: grid
+  type: default
   fields: [image, date, title, categories, author]
   categories: true
   sort-ui: true
