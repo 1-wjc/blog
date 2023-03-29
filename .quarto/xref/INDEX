@@ -22,5 +22,14 @@
   },
   "posts/Managing_data_with_tidyverse/index.qmd": {
     "index.html": "c50a3f80"
+  },
+  "posts/numpy/index.qmd": {
+    "index.html": "e5ae2a4a"
+  },
+  "posts/pandas/index.qmd": {
+    "index.html": "a8fbd789"
+  },
+  "posts/R_basic/index.qmd": {
+    "index.html": "1e799434"
   }
 }

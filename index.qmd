@@ -1,9 +1,9 @@
 ---
-title: "Blog"
+title: "Data Analyze blog"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: grid
   fields: [image, date, title, categories, author]
   categories: true
   sort-ui: true
