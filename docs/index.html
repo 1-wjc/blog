@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -153,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Open data analysis">Open data analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="open data analysis">open data analysis <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -165,8 +165,33 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="code" data-listing-date-sort="1678719600000" data-listing-file-modified-sort="1680069194101" data-listing-reading-time-sort="0.23">
+<div class="quarto-post image-right" data-index="0" data-categories="code" data-listing-date-sort="1678719600000" data-listing-file-modified-sort="1680070728282" data-listing-reading-time-sort="0.23">
 <div class="thumbnail">
 <p><a href="./posts/test_post/index.html"> <img src="./posts/test_post/image.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -201,7 +226,7 @@ Wonjun Choi
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="R,Open data analysis" data-listing-date-sort="1678374000000" data-listing-file-modified-sort="1680069920265" data-listing-reading-time-sort="4.24">
+<div class="quarto-post image-right" data-index="1" data-categories="open data analysis,R" data-listing-date-sort="1678374000000" data-listing-file-modified-sort="1680071361072" data-listing-reading-time-sort="3.975">
 <div class="thumbnail">
 <p><a href="./posts/Managing_data_with_tidyverse/index.html"> <img src="./posts/Managing_data_with_tidyverse/tidyverse.png" class="thumnail-image"> </a></p>
 </div>
@@ -211,20 +236,20 @@ Wonjun Choi
 Managing data with tidyverse
 </h3>
 <div class="listing-subtitle">
-
+Open Data Analysis ch02
 </div>
 </a>
 <div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('open data analysis'); return false;">
+open data analysis
+</div>
 <div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
 R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open data analysis'); return false;">
-Open data analysis
 </div>
 </div>
 <a href="./posts/Managing_data_with_tidyverse/index.html">
 <div class="listing-description">
-데이터 중에 조건에 해당하는 일부 데이터만 필터해서 사용
+<code>filter()</code>를 사용한 subset 추출
 </div>
 </a>
 </div>
