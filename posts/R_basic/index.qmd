@@ -2,7 +2,7 @@
 title: "R basic"
 author: "Wonjun Choi"
 date: "2023-03-20"
-categories: [R, Advanced R]
+categories: [R, advanced R]
 subtitle: "Advanced R basic"
 image: "rstudio.png"
 ---
