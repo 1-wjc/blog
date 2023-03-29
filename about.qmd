@@ -10,4 +10,4 @@ about:
 
 ---
 
-HNU 23-1 Data Mining
+Data analyzing code blog
