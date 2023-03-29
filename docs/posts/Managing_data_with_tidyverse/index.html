@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Wonjun Choi">
+<meta name="dcterms.date" content="2023-03-10">
+
+<title>blog - Managing data with tidyverse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Managing data with tidyverse</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Open data analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Wonjun Choi </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 10, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="tidyverse-패키지-및-간단한-사용법" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverse-패키지-및-간단한-사용법">1. Tidyverse 패키지 및 간단한 사용법</h2>
+<ul>
+<li>RStudio가 개발, 관리하는 패키지</li>
+<li>공식 문서가 매우 잘 되어 있음: https://www.tidyverse.org/</li>
+<li>사용자층이 두터워 영어로 검색하면 많은 질답을 찾을 수 있음</li>
+<li>6개의 핵심 패키지 포함 23가지 패키지로 이루어진 메타 패키지</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.0     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.1.8
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<ul>
+<li>코드가 길어지면 이해하기 어려운 한계가 존재
+<ol type="1">
+<li><code>rnorm</code> 평균이 10이고 표준편차가 1인 정규분포에서 데이터 10000개 생성</li>
+<li><code>sample</code> 데이터 10000개 중 100개 샘플링</li>
+<li><code>log</code> 로그</li>
+<li><code>diff</code> 차분</li>
+<li><code>plot</code> 그래프화</li>
+</ol></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">diff</span>(<span class="fu">log</span>(<span class="fu">sample</span>(<span class="fu">rnorm</span>(<span class="dv">10000</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mean =</span> <span class="dv">10</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sd =</span> <span class="dv">1</span>), </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">size =</span> <span class="dv">100</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">replace =</span> <span class="cn">FALSE</span>))), </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"red"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="파이프-연산자를-통한-코드의-직관화" class="level2">
+<h2 class="anchored" data-anchor-id="파이프-연산자를-통한-코드의-직관화">2. 파이프 연산자(%&gt;%)를 통한 코드의 직관화</h2>
+<ul>
+<li>Ctrl + Shift + M</li>
+<li>순차적 흐름으로 코드를 이해할 수 있음</li>
+<li>중간 변수들을 계속해서 Object로 할당할 필요가 없음</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="st">"red"</span>, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="flight-데이터의-파이프-연산자-예시" class="level2">
+<h2 class="anchored" data-anchor-id="flight-데이터의-파이프-연산자-예시">Flight 데이터의 파이프 연산자 예시</h2>
+<ul>
+<li>사용할 데이터셋은 뉴욕시에서 2013년에 출발한 336,776개의 모든 항공편이 포함된 데이터 (nycflights13 패키지의 flights 데이터셋)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("nycflights13")</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(flights) <span class="co"># 행의 수</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 336776</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(flights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+   year month   day dep_time sched_dep…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+1  2013     1     1      517         515       2     830     819      11 UA     
+2  2013     1     1      533         529       4     850     830      20 UA     
+3  2013     1     1      542         540       2     923     850      33 AA     
+4  2013     1     1      544         545      -1    1004    1022     -18 B6     
+5  2013     1     1      554         600      -6     812     837     -25 DL     
+6  2013     1     1      554         558      -4     740     728      12 UA     
+# … with 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;,
+#   dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
+#   time_hour &lt;dttm&gt;, and abbreviated variable names ¹​sched_dep_time,
+#   ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+</div>
+<ul>
+<li>flights data를 선택 후, <code>group_by</code> 한 후, <code>summarise</code>를 수행</li>
+<li>각 function의 기능이 무엇인지 몰라도 대략적인 흐름 파악 가능</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'year', 'month'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 365 × 5
+# Groups:   year, month [12]
+    year month   day delay na.rm
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;lgl&gt;
+ 1  2013     1     1    NA TRUE 
+ 2  2013     1     2    NA TRUE 
+ 3  2013     1     3    NA TRUE 
+ 4  2013     1     4    NA TRUE 
+ 5  2013     1     5    NA TRUE 
+ 6  2013     1     6    NA TRUE 
+ 7  2013     1     7    NA TRUE 
+ 8  2013     1     8    NA TRUE 
+ 9  2013     1     9    NA TRUE 
+10  2013     1    10    NA TRUE 
+# … with 355 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean_delay_by_day <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span> <span class="co"># 연도, 월, 일자에 대해서 group</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'year', 'month'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+</div>
+</section>
+<section id="dplyr-패키지에-포함된-유용한-명령어들" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr-패키지에-포함된-유용한-명령어들">4. <code>dplyr</code> 패키지에 포함된 유용한 명령어들</h2>
+<section id="select-열-방향-선택" class="level3">
+<h3 class="anchored" data-anchor-id="select-열-방향-선택">4-1 <code>select()</code> : 열 방향 선택</h3>
+<ul>
+<li>데이터에서 특정 컬럼을 선택하고 싶을 때 사용</li>
+<li>선언된 순서대로 컬럼을 정렬</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">select</span>(year, month, day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 3
+    year month   day
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# … with 336,766 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 컬럼에 띄어쓰기가 존재할 때</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">$</span><span class="st">`</span><span class="at">not use</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 컬럼 이름에 되도록 띄어쓰기 사용 X</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span>  <span class="fu">select</span>(<span class="st">`</span><span class="at">not use</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 1
+   `not use`
+       &lt;dbl&gt;
+ 1         0
+ 2         0
+ 3         0
+ 4         0
+ 5         0
+ 6         0
+ 7         0
+ 8         0
+ 9         0
+10         0
+# … with 336,766 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 해당 컬럼 삭제</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">$</span><span class="st">`</span><span class="at">not use</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mutate-새로운-컬럼을-만들거나-계산하고-싶을-때" class="level3">
+<h3 class="anchored" data-anchor-id="mutate-새로운-컬럼을-만들거나-계산하고-싶을-때">4-2 <code>mutate()</code> : 새로운 컬럼을 만들거나 계산하고 싶을 때</h3>
+<ul>
+<li>편의성을 위해 일부 데이터만 추출</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>flight_sample <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> <span class="fu">select</span>(year<span class="sc">:</span>day, <span class="fu">ends_with</span>(<span class="st">"delay"</span>), distance, air_time)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>flight_sample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 7
+    year month   day dep_delay arr_delay distance air_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1  2013     1     1         2        11     1400      227
+ 2  2013     1     1         4        20     1416      227
+ 3  2013     1     1         2        33     1089      160
+ 4  2013     1     1        -1       -18     1576      183
+ 5  2013     1     1        -6       -25      762      116
+ 6  2013     1     1        -4        12      719      150
+ 7  2013     1     1        -5        19     1065      158
+ 8  2013     1     1        -3       -14      229       53
+ 9  2013     1     1        -3        -8      944      140
+10  2013     1     1        -2         8      733      138
+# … with 336,766 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>각 컬럼간의 계산으로 새로운 열(Column)을 만듬</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>flight_sample<span class="sc">$</span>net_delay <span class="ot">&lt;-</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  flight_sample<span class="sc">$</span>arr_delay <span class="sc">-</span> flight_sample<span class="sc">$</span>dep_delay</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>flight_sample<span class="sc">$</span>speed <span class="ot">&lt;-</span> flight_sample<span class="sc">$</span>distance<span class="sc">/</span>flight_sample<span class="sc">$</span>air_time<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate 사용하여 구현</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>flight_sample <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">net_delay =</span> arr_delay <span class="sc">-</span> dep_delay,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">speed =</span> distance<span class="sc">/</span>air_time<span class="sc">*</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 9
+    year month   day dep_delay arr_delay distance air_time net_delay speed
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1  2013     1     1         2        11     1400      227         9  370.
+ 2  2013     1     1         4        20     1416      227        16  374.
+ 3  2013     1     1         2        33     1089      160        31  408.
+ 4  2013     1     1        -1       -18     1576      183       -17  517.
+ 5  2013     1     1        -6       -25      762      116       -19  394.
+ 6  2013     1     1        -4        12      719      150        16  288.
+ 7  2013     1     1        -5        19     1065      158        24  404.
+ 8  2013     1     1        -3       -14      229       53       -11  259.
+ 9  2013     1     1        -3        -8      944      140        -5  405.
+10  2013     1     1        -2         8      733      138        10  319.
+# … with 336,766 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="filter-행방향으로-조건을-설정" class="level3">
+<h3 class="anchored" data-anchor-id="filter-행방향으로-조건을-설정">4-3 <code>filter()</code> : 행방향으로 조건을 설정</h3>
+<ul>
+<li><p>데이터 중에 조건에 해당하는 일부 데이터만 필터해서 사용</p></li>
+<li><p>논리연산자와 결합하여 많이 사용</p></li>
+<li><p>논리연산자에 대한 자세한 내용은 <a href="https://mrchypark.github.io/post/논리-연산자-정리/">링크</a> 참조</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 논리 연산자</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 숫자를 사용한 인덱싱</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 논리연산자를 사용한 인덱싱</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>a[a<span class="sc">&gt;</span>b]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 50</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 50</code></pre>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th>연산자</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>a &lt; b</code></td>
+<td>a가 b보다 작다</td>
+</tr>
+<tr class="even">
+<td><code>a &lt;= b</code></td>
+<td>a가 b보다 작거나 같다</td>
+</tr>
+<tr class="odd">
+<td><code>a == b</code></td>
+<td>a와 b가 같다</td>
+</tr>
+<tr class="even">
+<td><code>a != b</code></td>
+<td>a와 b가 같지 않다</td>
+</tr>
+<tr class="odd">
+<td><code>!x</code></td>
+<td>x가 아니다</td>
+</tr>
+<tr class="even">
+<td><code>x | y</code></td>
+<td>x이거나 y이다</td>
+</tr>
+<tr class="odd">
+<td><code>x &amp; y</code></td>
+<td>x이고 y이다</td>
+</tr>
+<tr class="even">
+<td><code>isTRUE(x)</code></td>
+<td>x가 TRUE이다</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month<span class="sc">==</span><span class="dv">1</span>) <span class="co"># 1월 데이터만 추출</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27,004 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013     1     1      517        515       2     830     819      11 UA     
+ 2  2013     1     1      533        529       4     850     830      20 UA     
+ 3  2013     1     1      542        540       2     923     850      33 AA     
+ 4  2013     1     1      544        545      -1    1004    1022     -18 B6     
+ 5  2013     1     1      554        600      -6     812     837     -25 DL     
+ 6  2013     1     1      554        558      -4     740     728      12 UA     
+ 7  2013     1     1      555        600      -5     913     854      19 B6     
+ 8  2013     1     1      557        600      -3     709     723     -14 EV     
+ 9  2013     1     1      557        600      -3     838     846      -8 B6     
+10  2013     1     1      558        600      -2     753     745       8 AA     
+# … with 26,994 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month<span class="sc">==</span><span class="dv">12</span>, day <span class="sc">==</span> <span class="dv">1</span>) <span class="co"># 12월 1일 데이터만 추출</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 987 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013    12     1       13       2359      14     446     445       1 B6     
+ 2  2013    12     1       17       2359      18     443     437       6 B6     
+ 3  2013    12     1      453        500      -7     636     651     -15 US     
+ 4  2013    12     1      520        515       5     749     808     -19 UA     
+ 5  2013    12     1      536        540      -4     845     850      -5 AA     
+ 6  2013    12     1      540        550     -10    1005    1027     -22 B6     
+ 7  2013    12     1      541        545      -4     734     755     -21 EV     
+ 8  2013    12     1      546        545       1     826     835      -9 UA     
+ 9  2013    12     1      549        600     -11     648     659     -11 US     
+10  2013    12     1      550        600     -10     825     854     -29 B6     
+# … with 977 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+</div>
+</section>
+<section id="bind_rows" class="level3">
+<h3 class="anchored" data-anchor-id="bind_rows">4-4 <code>bind_rows()</code></h3>
+<ul>
+<li>두 데이터를 행방향으로 묶음</li>
+<li>데이터를 아래로 붙임</li>
+</ul>
+<p><code>filter()</code>를 사용한 subset 추출</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>jan <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>feb <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>janfeb <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(jan, feb) <span class="co"># 1번 방법</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>janfeb <span class="ot">&lt;-</span> jan <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(feb) <span class="co"># 2번 방법</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 51,955 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013     1     1      517        515       2     830     819      11 UA     
+ 2  2013     1     1      533        529       4     850     830      20 UA     
+ 3  2013     1     1      542        540       2     923     850      33 AA     
+ 4  2013     1     1      544        545      -1    1004    1022     -18 B6     
+ 5  2013     1     1      554        600      -6     812     837     -25 DL     
+ 6  2013     1     1      554        558      -4     740     728      12 UA     
+ 7  2013     1     1      555        600      -5     913     854      19 B6     
+ 8  2013     1     1      557        600      -3     709     723     -14 EV     
+ 9  2013     1     1      557        600      -3     838     846      -8 B6     
+10  2013     1     1      558        600      -2     753     745       8 AA     
+# … with 51,945 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange-데이터-정렬" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-데이터-정렬">4-5 <code>arrange()</code> : 데이터 정렬</h3>
+<ul>
+<li>지정되는 컬럼 기준으로 오름차순 정렬</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 오름차순 정렬</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013    12     7     2040       2123     -43      40    2352      48 B6     
+ 2  2013     2     3     2022       2055     -33    2240    2338     -58 DL     
+ 3  2013    11    10     1408       1440     -32    1549    1559     -10 EV     
+ 4  2013     1    11     1900       1930     -30    2233    2243     -10 DL     
+ 5  2013     1    29     1703       1730     -27    1947    1957     -10 F9     
+ 6  2013     8     9      729        755     -26    1002     955       7 MQ     
+ 7  2013    10    23     1907       1932     -25    2143    2143       0 EV     
+ 8  2013     3    30     2030       2055     -25    2213    2250     -37 MQ     
+ 9  2013     3     2     1431       1455     -24    1601    1631     -30 9E     
+10  2013     5     5      934        958     -24    1225    1309     -44 B6     
+# … with 336,766 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 내림차순 정렬</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013     1     9      641        900    1301    1242    1530    1272 HA     
+ 2  2013     6    15     1432       1935    1137    1607    2120    1127 MQ     
+ 3  2013     1    10     1121       1635    1126    1239    1810    1109 MQ     
+ 4  2013     9    20     1139       1845    1014    1457    2210    1007 AA     
+ 5  2013     7    22      845       1600    1005    1044    1815     989 MQ     
+ 6  2013     4    10     1100       1900     960    1342    2211     931 DL     
+ 7  2013     3    17     2321        810     911     135    1020     915 DL     
+ 8  2013     6    27      959       1900     899    1236    2226     850 DL     
+ 9  2013     7    22     2257        759     898     121    1026     895 DL     
+10  2013    12     5      756       1700     896    1058    2020     878 AA     
+# … with 336,766 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+</div>
+</section>
+<section id="group_by-summarise-그룹별로-계산을-수행" class="level3">
+<h3 class="anchored" data-anchor-id="group_by-summarise-그룹별로-계산을-수행">4-6 <code>group_by()</code> &amp; <code>summarise()</code> : 그룹별로 계산을 수행</h3>
+<ul>
+<li>그룹별로 통계치를 뽑거나 특정 계산을 수행하고 싶은 경우</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group을 하지 않았을 때</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_dep_delay  count
+           &lt;dbl&gt;  &lt;int&gt;
+1           12.6 336776</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   month mean_dep_delay count
+   &lt;int&gt;          &lt;dbl&gt; &lt;int&gt;
+ 1     1          10.0  27004
+ 2     2          10.8  24951
+ 3     3          13.2  28834
+ 4     4          13.9  28330
+ 5     5          13.0  28796
+ 6     6          20.8  28243
+ 7     7          21.7  29425
+ 8     8          12.6  29327
+ 9     9           6.72 27574
+10    10           6.24 28889
+11    11           5.44 27268
+12    12          16.6  28135</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 월마다 가장 연착이 긴 시간을 뽑아보기</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_dep_delay =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   month count mean_dep_delay max_dep_delay
+   &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1     1 27004          10.0           1301
+ 2     2 24951          10.8            853
+ 3     3 28834          13.2            911
+ 4     4 28330          13.9            960
+ 5     5 28796          13.0            878
+ 6     6 28243          20.8           1137
+ 7     7 29425          21.7           1005
+ 8     8 29327          12.6            520
+ 9     9 27574           6.72          1014
+10    10 28889           6.24           702
+11    11 27268           5.44           798
+12    12 28135          16.6            896</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 월마다 가장 연착이 많이된 비행기는 해당 월의 평균보다 몇배가 높나요?</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_dep_delay =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> T))</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>a <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">max_dep_delay_ratio =</span> max_dep_delay <span class="sc">/</span> mean_dep_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 5
+   month count mean_dep_delay max_dep_delay max_dep_delay_ratio
+   &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;
+ 1     1 27004          10.0           1301               130. 
+ 2     2 24951          10.8            853                78.9
+ 3     3 28834          13.2            911                68.9
+ 4     4 28330          13.9            960                68.9
+ 5     5 28796          13.0            878                67.6
+ 6     6 28243          20.8           1137                54.5
+ 7     7 29425          21.7           1005                46.3
+ 8     8 29327          12.6            520                41.2
+ 9     9 27574           6.72          1014               151. 
+10    10 28889           6.24           702               112. 
+11    11 27268           5.44           798               147. 
+12    12 28135          16.6            896                54.1</code></pre>
+</div>
+</div>
+</section>
+<section id="left_join" class="level3">
+<h3 class="anchored" data-anchor-id="left_join">4-7 <code>left_join()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 특정 컬럼만 추출</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>flight_sample <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> <span class="fu">select</span>(year<span class="sc">:</span>day, origin, carrier)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>flight_sample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 5
+    year month   day origin carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1  2013     1     1 EWR    UA     
+ 2  2013     1     1 LGA    UA     
+ 3  2013     1     1 JFK    AA     
+ 4  2013     1     1 JFK    B6     
+ 5  2013     1     1 LGA    DL     
+ 6  2013     1     1 EWR    UA     
+ 7  2013     1     1 EWR    B6     
+ 8  2013     1     1 LGA    EV     
+ 9  2013     1     1 JFK    B6     
+10  2013     1     1 LGA    AA     
+# … with 336,766 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 항공사 이름</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>airlines</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier name                       
+   &lt;chr&gt;   &lt;chr&gt;                      
+ 1 9E      Endeavor Air Inc.          
+ 2 AA      American Airlines Inc.     
+ 3 AS      Alaska Airlines Inc.       
+ 4 B6      JetBlue Airways            
+ 5 DL      Delta Air Lines Inc.       
+ 6 EV      ExpressJet Airlines Inc.   
+ 7 F9      Frontier Airlines Inc.     
+ 8 FL      AirTran Airways Corporation
+ 9 HA      Hawaiian Airlines Inc.     
+10 MQ      Envoy Air                  
+11 OO      SkyWest Airlines Inc.      
+12 UA      United Air Lines Inc.      
+13 US      US Airways Inc.            
+14 VX      Virgin America             
+15 WN      Southwest Airlines Co.     
+16 YV      Mesa Airlines Inc.         </code></pre>
+</div>
+</div>
+<ul>
+<li>두 데이터를 특정한 key value를 기준으로 좌우로 붙이고 싶을 때 <code>left_join()</code>을 사용</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>flight_sample <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 6
+    year month   day origin carrier name                    
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;                   
+ 1  2013     1     1 EWR    UA      United Air Lines Inc.   
+ 2  2013     1     1 LGA    UA      United Air Lines Inc.   
+ 3  2013     1     1 JFK    AA      American Airlines Inc.  
+ 4  2013     1     1 JFK    B6      JetBlue Airways         
+ 5  2013     1     1 LGA    DL      Delta Air Lines Inc.    
+ 6  2013     1     1 EWR    UA      United Air Lines Inc.   
+ 7  2013     1     1 EWR    B6      JetBlue Airways         
+ 8  2013     1     1 LGA    EV      ExpressJet Airlines Inc.
+ 9  2013     1     1 JFK    B6      JetBlue Airways         
+10  2013     1     1 LGA    AA      American Airlines Inc.  
+# … with 336,766 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Key 값의 컬럼 이름이 다를 경우</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(airlines)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"company_name"</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>flight_sample <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"carrier"</span> <span class="ot">=</span> <span class="st">"company_name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 6
+    year month   day origin carrier name                    
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;                   
+ 1  2013     1     1 EWR    UA      United Air Lines Inc.   
+ 2  2013     1     1 LGA    UA      United Air Lines Inc.   
+ 3  2013     1     1 JFK    AA      American Airlines Inc.  
+ 4  2013     1     1 JFK    B6      JetBlue Airways         
+ 5  2013     1     1 LGA    DL      Delta Air Lines Inc.    
+ 6  2013     1     1 EWR    UA      United Air Lines Inc.   
+ 7  2013     1     1 EWR    B6      JetBlue Airways         
+ 8  2013     1     1 LGA    EV      ExpressJet Airlines Inc.
+ 9  2013     1     1 JFK    B6      JetBlue Airways         
+10  2013     1     1 LGA    AA      American Airlines Inc.  
+# … with 336,766 more rows</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,242 @@
+---
+title: "Managing data with tidyverse"
+author: "Wonjun Choi"
+date: "2023-03-10"
+categories: [R, Open data analysis]
+image: "tidyverse.png"
+---
+
+## 1. Tidyverse 패키지 및 간단한 사용법
+
+- RStudio가 개발, 관리하는 패키지
+- 공식 문서가 매우 잘 되어 있음:  https://www.tidyverse.org/
+- 사용자층이 두터워 영어로 검색하면 많은 질답을 찾을 수 있음
+- 6개의 핵심 패키지 포함 23가지 패키지로 이루어진 메타 패키지
+
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+- 코드가 길어지면 이해하기 어려운 한계가 존재
+  1. `rnorm` 평균이 10이고 표준편차가 1인 정규분포에서 데이터 10000개 생성
+  2. `sample` 데이터 10000개 중 100개 샘플링
+  3. `log` 로그
+  4. `diff` 차분
+  5. `plot` 그래프화
+```{r}
+plot(diff(log(sample(rnorm(10000, 
+                           mean = 10, 
+                           sd = 1), 
+                     size = 100, 
+                     replace = FALSE))), 
+     col = "red", 
+     type = "l")
+```
+
+## 2. 파이프 연산자(%>%)를 통한 코드의 직관화
+
+- Ctrl + Shift + M
+- 순차적 흐름으로 코드를 이해할 수 있음
+- 중간 변수들을 계속해서 Object로 할당할 필요가 없음
+
+```{r}
+rnorm(10000, mean = 10, sd = 1) %>%
+  sample(size = 100, replace = FALSE) %>%
+  log() %>%
+  diff() %>%
+  plot(col = "red", type = "l")
+```
+
+### Flight 데이터의 파이프 연산자 예시
+
+- 사용할 데이터셋은 뉴욕시에서 2013년에 출발한 336,776개의 모든 항공편이 포함된 데이터 (nycflights13 패키지의 flights 데이터셋)
+
+```{r}
+# install.packages("nycflights13")
+library(nycflights13)
+
+nrow(flights) # 행의 수
+head(flights)
+```
+
+- flights data를 선택 후, `group_by` 한 후, `summarise`를 수행
+- 각 function의 기능이 무엇인지 몰라도 대략적인 흐름 파악 가능
+
+```{r}
+flights %>% 
+  group_by(year, month, day) %>% 
+  summarise(delay = mean(dep_delay), na.rm = TRUE)
+
+mean_delay_by_day <- flights %>% 
+  group_by(year, month, day) %>% # 연도, 월, 일자에 대해서 group
+  summarise(delay = mean(dep_delay), na.rm = TRUE) %>% 
+  arrange(desc(delay))
+```
+## 4. `dplyr` 패키지에 포함된 유용한 명령어들
+### 4-1 `select()` : 열 방향 선택
+
+- 데이터에서 특정 컬럼을 선택하고 싶을 때 사용
+- 선언된 순서대로 컬럼을 정렬
+```{r}
+flights %>% select(year, month, day)
+
+# 컬럼에 띄어쓰기가 존재할 때
+flights$`not use` <- 0
+
+# 컬럼 이름에 되도록 띄어쓰기 사용 X
+flights %>%  select(`not use`)
+
+# 해당 컬럼 삭제
+flights$`not use` <- NULL
+```
+
+### 4-2 `mutate()` : 새로운 컬럼을 만들거나 계산하고 싶을 때
+
+- 편의성을 위해 일부 데이터만 추출
+
+```{r}
+flight_sample <- flights %>% select(year:day, ends_with("delay"), distance, air_time)
+flight_sample
+```
+
+- 각 컬럼간의 계산으로 새로운 열(Column)을 만듬
+
+```{r}
+flight_sample$net_delay <-
+  flight_sample$arr_delay - flight_sample$dep_delay
+
+flight_sample$speed <- flight_sample$distance/flight_sample$air_time*60
+
+# mutate 사용하여 구현
+flight_sample %>% mutate(net_delay = arr_delay - dep_delay,
+                         speed = distance/air_time*60)
+```
+
+### 4-3 `filter()` : 행방향으로 조건을 설정
+
+- 데이터 중에 조건에 해당하는 일부 데이터만 필터해서 사용
+- 논리연산자와 결합하여 많이 사용
+
+- 논리연산자에 대한 자세한 내용은 [링크](https://mrchypark.github.io/post/논리-연산자-정리/) 참조
+
+```{r}
+a <- c(10, 20, 30, 40, 50)
+b <- 30
+
+# 논리 연산자
+a == b
+a > b
+
+# 숫자를 사용한 인덱싱
+a[1]
+a[3]
+a[c(1, 3)]
+
+# 논리연산자를 사용한 인덱싱
+a[a>b]
+a[c(4, 5)]
+```
+
+|연산자|설명|
+|--|--|
+`a < b` | a가 b보다 작다
+`a <= b` | a가 b보다 작거나 같다
+`a == b` | a와 b가 같다
+`a != b` | a와 b가 같지 않다
+`!x` | x가 아니다
+`x | y` | x이거나 y이다
+`x & y` | x이고 y이다
+`isTRUE(x)` | x가 TRUE이다
+
+```{r}
+flights %>% filter(month==1) # 1월 데이터만 추출
+
+flights %>% filter(month==12, day == 1) # 12월 1일 데이터만 추출
+```
+
+### 4-4 `bind_rows()`
+
+- 두 데이터를 행방향으로 묶음
+- 데이터를 아래로 붙임
+
+`filter()`를 사용한 subset 추출
+```{r}
+jan <- flights %>% filter(month == 1)
+
+feb <- flights %>% filter(month == 2)
+
+janfeb <- bind_rows(jan, feb) # 1번 방법
+
+janfeb <- jan %>% bind_rows(feb) # 2번 방법
+
+flights %>% filter(month %in% c(1,2))
+```
+
+### 4-5 `arrange()` : 데이터 정렬
+
+- 지정되는 컬럼 기준으로 오름차순 정렬
+```{r}
+# 오름차순 정렬
+flights %>% arrange(dep_delay)
+
+# 내림차순 정렬
+flights %>% arrange(-dep_delay)
+
+```
+
+### 4-6 `group_by()` & `summarise()` : 그룹별로 계산을 수행
+
+- 그룹별로 통계치를 뽑거나 특정 계산을 수행하고 싶은 경우
+```{r}
+# Group을 하지 않았을 때
+flights %>% 
+  summarise(mean_dep_delay = mean(dep_delay, na.rm = T),
+            count = n())
+
+flights %>% 
+  group_by(month) %>% 
+  summarise(mean_dep_delay = mean(dep_delay, na.rm = T),
+            count = n())
+
+# 월마다 가장 연착이 긴 시간을 뽑아보기
+flights %>% 
+  group_by(month) %>% 
+  summarise(count = n(),
+            mean_dep_delay = mean(dep_delay, na.rm = T),
+            max_dep_delay = max(dep_delay, na.rm = T))
+
+# 월마다 가장 연착이 많이된 비행기는 해당 월의 평균보다 몇배가 높나요?
+a <- flights %>% 
+  group_by(month) %>% 
+  summarise(count = n(),
+            mean_dep_delay = mean(dep_delay, na.rm = T),
+            max_dep_delay = max(dep_delay, na.rm = T))
+            
+a %>% mutate(max_dep_delay_ratio = max_dep_delay / mean_dep_delay)
+```
+
+### 4-7 `left_join()`
+```{r}
+# 특정 컬럼만 추출
+flight_sample <- flights %>% select(year:day, origin, carrier)
+flight_sample
+```
+
+```{r}
+# 항공사 이름
+airlines
+```
+
+- 두 데이터를 특정한 key value를 기준으로 좌우로 붙이고 싶을 때 `left_join()`을 사용
+```{r}
+flight_sample %>% left_join(airlines, by = "carrier")
+```
+
+- Key 값의 컬럼 이름이 다를 경우
+```{r}
+colnames(airlines)[1] <- "company_name"
+
+flight_sample %>% left_join(airlines, by = c("carrier" = "company_name"))
+```
+

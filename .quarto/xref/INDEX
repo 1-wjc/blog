@@ -16,5 +16,11 @@
   },
   "posts/test_post/index.qmd": {
     "index.html": "5acd4461"
+  },
+  "posts/Managing data with tidyverse/index.qmd": {
+    "index.html": "8a6af45a"
+  },
+  "posts/Managing_data_with_tidyverse/index.qmd": {
+    "index.html": "c50a3f80"
   }
 }
