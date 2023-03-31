@@ -6,3 +6,5 @@ categories: [R, advanced R]
 subtitle: "Advanced R basic"
 image: "rstudio.png"
 ---
+
+R basic
