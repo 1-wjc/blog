@@ -1,0 +1,314 @@
+---
+title: "Data transformation"
+author: "Wonjun Choi"
+date: "2023-03-22"
+categories: [R, open data analysis]
+subtitle: "Open Data Analysis ch02"
+image: "tidyverse.png"
+---
+
+### Import libraries
+```{r}
+library(nycflights13)
+library(tidyverse)
+```
+
+### nycflights13
+```{r}
+flights
+```
+
+```{r}
+View(flights)
+```
+
+```{r}
+str(flights)
+```
+
+```{r}
+colnames(flights)
+```
+
+### dplyr basics
+```{r}
+table(flights$month)
+
+nov_dec <- flights %>% filter(month %in% c(11, 12))
+table(nov_dec$month)
+
+nov_dec2 <- flights %>% filter(month == 12 | month == 11)
+table(nov_dec2$month)
+```
+
+### Missing values
+```{r}
+flights <- flights
+NA
+
+NA > 5
+
+10 == NA
+
+NA + 10
+
+NA / 2
+```
+
+```{r}
+x <- NA
+
+is.na(x)
+
+# dep_time의 결측치가 몇개인지 출력
+is.na(flights$dep_time) %>% sum()
+
+sum(is.na(flights$dep_time))
+
+flights$dep_time %>% is.na() %>% sum()
+
+flights %>% pull(dep_time) %>% is.na %>% sum
+```
+
+Question: dep_time의 결측치를 dep_time의 평균값으로 교체
+```{r}
+# replace_na
+mean_dep_time <- mean(flights$dep_time, na.rm = T) %>% as.integer()
+
+flights_na_replace <- flights %>% 
+  replace_na(list(dep_time = mean_dep_time))
+
+# mutate
+flights_na_replace_m <- flights %>% 
+  mutate(dep_time = ifelse(is.na(dep_time), 
+                           mean_dep_time,
+                           dep_time))
+```
+
+
+```{r}
+df <- data.frame(x = c(1, NA, 3))
+df
+class(df)
+
+df <- tibble(x = c(1, NA, 3))
+class(df)
+
+df %>% filter(x > 1)
+df %>% filter(is.na(x) | x > 1)
+
+# NA를 지우고 싶을 때
+df %>%  drop_na(x)
+
+df2 <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"))
+df2
+df2 %>% drop_na()
+df2$y <- NULL
+```
+
+## Arrange rows with `arrange()`
+```{r}
+flights %>% arrange(dep_time)
+```
+
+결측치는 항상 하단에 정렬:
+```{r}
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+arrange(df, desc(x))
+```
+
+### Select columns with `select()`
+```{r}
+flights %>% select(year, month, day)
+```
+
+```{r}
+flights %>% select(year:day)
+```
+
+```{r}
+select(flights, -(year:day))
+```
+
+There are a number of helper functions you can use within `select()`:
+- `starts_with("abc")`: matches names that begin with "abc".
+- `ends_with("time")`: matches names that end with "xyz".
+- `contains("time")`: matches names that contain "ijk".
+- `num_range("x", 1:3): matches `x1`, `x2`, and `x3`.
+
+```{r}
+c("x1", "x2", "x3", "y1", "y2", "y3", "y4")
+```
+
+```{r}
+flights %>% select(new_year = year)
+
+flights %>% rename(tail_num = tailnum, new_year = year)
+```
+
+```{r}
+# 컬럼 위치 이동 (time_hour, air_time 맨 앞으로 이동)
+flights %>% select(time_hour, air_time, everything())
+```
+
+- `contains`
+```{r}
+flights %>% select(contains("time"))
+```
+
+## Add new variables with `mutate()`
+```{r}
+# transmute 사용
+flights %>% transmute(
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+
+# mutate & select 사용
+flights %>%
+  mutate(
+    gain = dep_delay - arr_delay,
+    hours = air_time / 60,
+    gain_per_hour = gain / hours
+  ) %>%
+  select(gain, hour, gain_per_hour)
+
+# 새로운 컬럼을 원하는 위치에 생성
+flights %>%
+  mutate(
+    gain = dep_delay - arr_delay,
+    hours = air_time / 60,
+    gain_per_hour = gain / hours,
+    .after = year
+  )
+```
+
+### Useful creation functions
+```{r}
+transmute(flights,
+          dep_time,
+          hour = dep_time %/% 100,
+          minute = dep_time %% 100)
+```
+
+### Missing values
+```{r}
+flights %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay))
+```
+
+```{r}
+flights %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay), na.rm = TRUE)
+```
+
+```{r}
+# filter & is.na 사용용
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+# drop_na 사용
+not_cancelled_drop <- flights %>% 
+  drop_na(dep_delay, arr_delay)
+
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay))
+```
+
+### Grouping by multiple variables
+```{r}
+daily <- flights %>% group_by(year, month, day)
+flights
+daily
+
+(per_day   <- daily %>% summarise(flights = n()))
+
+(per_month <- per_day %>% summarise(flights = sum(flights)))
+
+(per_year  <- per_month %>% summarise(flights = sum(flights)))
+```
+ 
+### Ungrouping
+```{r}
+daily %>% 
+  ungroup() %>% 
+  summarise(flights = n())
+```
+
+## Grouped mutates (and filters)
+- Find the worst members of each group
+- 년/월/일자별 가장 arr_delay가 높은 10개 비행 추출
+
+```{r}
+flights %>%
+  group_by(year, month, day) %>%
+  filter(rank(desc(arr_delay)) < 11) %>%
+  select(year, month, day, arr_delay) %>%
+  arrange(year, month, day, desc(arr_delay))
+
+# slice_max, slice_min 활용
+flights %>% 
+  group_by(year, month, day) %>% 
+  slice_max(arr_delay, n = 10) %>% 
+  select(year, month, day, arr_delay)
+
+# Quiz: 연도와 월별로 arr_delay가 가장 큰 3개 날짜 추출
+flights %>% 
+  group_by(year, month) %>% 
+  slice_max(arr_delay, n = 3) %>% 
+  select(year, month, day, arr_delay)
+```
+
+- `dest`(도착공항) 그룹화 후 10000대 이상 착륙한 공항 비행정보 추출
+```{r}
+popular_dests <- flights %>% 
+  group_by(dest) %>% 
+  filter(n() > 10000)
+
+unique(flights$dest)
+unique(popular_dests$dest)
+
+flights %>% 
+  group_by(dest) %>% 
+  summarise(count = n()) %>% 
+  filter(count > 10000)
+```
+- Standardize to compute per group metrics:
+```{r}
+tmp <- popular_dests %>% 
+  group_by(month) %>% 
+  filter(arr_delay > 0) %>% 
+  mutate(prop_delay = arr_delay / sum(arr_delay)) %>% 
+  select(year:day, dest, arr_delay, prop_delay)
+
+tmp
+```
+
+- example
+```{r}
+grade <- tibble(name = c("Paul", "James", "Durant", "Harden", "Jordan"),
+                region = c("West", "West", "East", "East", "East"),
+                score = c(95, 91, 87, 89, 100))
+
+# Group_by 하지 않았을 때
+score_proportion <- grade %>% 
+  mutate(prop_score = score / sum(score))
+
+score_proportion
+
+sum(score_proportion$prop_score)
+
+# region별 Group
+score_proportion_region <- grade %>% 
+  group_by(region) %>% 
+  mutate(prop_score = score / sum(score))
+
+score_proportion_region
+
+sum(score_proportion_region$prop_score)
+```

@@ -3,5 +3,5 @@ title: "Language Semestics"
 author: "Wonjun Choi"
 date: "2023-03-10"
 categories: [Python, advanced Python]
-subtitle: "advanced python ch02"
+subtitle: "Advanced Python ch02"
 ---
