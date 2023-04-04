@@ -46,5 +46,11 @@
   },
   "posts/Data_transformation/index.qmd": {
     "index.html": "af0eff62"
+  },
+  "posts/Numpy/week_1_numpy.ipynb": {
+    "week_1_numpy.html": "b66689bf"
+  },
+  "posts/Pandas/pandas.ipynb": {
+    "pandas.html": "5f466165"
   }
 }

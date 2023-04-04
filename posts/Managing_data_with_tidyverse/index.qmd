@@ -3,7 +3,7 @@ title: "Managing data with tidyverse"
 author: "Wonjun Choi"
 date: "2023-03-10"
 categories: [R, open data analysis]
-subtitle: "Open Data Analysis ch02"
+subtitle: "Open Data Analysis week2"
 ---
 
 ## 1. Tidyverse 패키지 및 간단한 사용법
