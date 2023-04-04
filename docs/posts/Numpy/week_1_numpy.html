@@ -204,10 +204,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<section id="numpy-기본" class="level1">
-<h1>“Numpy 기본”</h1>
+<section id="numpy-기본" class="level2">
+<h2 class="anchored" data-anchor-id="numpy-기본">Numpy 기본</h2>
 <blockquote class="blockquote">
-<p>“numpy 기본 코드 실습(한글)”</p>
+<p>numpy 기본 코드 실습(한글)</p>
 </blockquote>
 <p><strong>도구 - 넘파이(NumPy)</strong></p>
 <p>*넘파이(NumPy)는 파이썬의 과학 컴퓨팅을 위한 기본 라이브러리입니다. 넘파이의 핵심은 강력한 N-차원 배열 객체입니다. 또한 선형 대수, 푸리에(Fourier) 변환, 유사 난수 생성과 같은 유용한 함수들도 제공합니다.”</p>
@@ -220,14 +220,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr></tbody></table>
 <p><br></p>
 </section>
-<section id="배열-생성" class="level1">
-<h1>배열 생성</h1>
+<section id="배열-생성" class="level2">
+<h2 class="anchored" data-anchor-id="배열-생성">배열 생성</h2>
 <p><code>numpy</code>를 임포트해 보죠. 대부분의 사람들이 <code>np</code>로 알리아싱하여 임포트합니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:6,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1678171111828,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="np.zeros" class="level2">
-<h2 class="anchored" data-anchor-id="np.zeros"><code>np.zeros</code></h2>
+<section id="np.zeros" class="level3">
+<h3 class="anchored" data-anchor-id="np.zeros"><code>np.zeros</code></h3>
 <p><code>zeros</code> 함수는 0으로 채워진 배열을 만듭니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:594,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1678171124655,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="48a8f50e-a985-4bd7-df0d-098d95aceaf9" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.zeros(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -245,8 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="용어" class="level2">
-<h2 class="anchored" data-anchor-id="용어">용어</h2>
+<section id="용어" class="level3">
+<h3 class="anchored" data-anchor-id="용어">용어</h3>
 <ul>
 <li>넘파이에서 각 차원을 <strong>축</strong>(axis) 이라고 합니다</li>
 <li>축의 개수를 <strong>랭크</strong>(rank) 라고 합니다.
@@ -289,8 +289,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="n-차원-배열" class="level2">
-<h2 class="anchored" data-anchor-id="n-차원-배열">N-차원 배열</h2>
+<section id="n-차원-배열" class="level3">
+<h3 class="anchored" data-anchor-id="n-차원-배열">N-차원 배열</h3>
 <p>임의의 랭크 수를 가진 N-차원 배열을 만들 수 있습니다. 예를 들어, 다음은 크기가 <code>(2,3,4)</code>인 3D 배열(랭크=3)입니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:10,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1678171156612,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="419d82ab-6087-4e31-b1ee-de9f91224322" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>np.zeros((<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -305,8 +305,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="배열-타입" class="level2">
-<h2 class="anchored" data-anchor-id="배열-타입">배열 타입</h2>
+<section id="배열-타입" class="level3">
+<h3 class="anchored" data-anchor-id="배열-타입">배열 타입</h3>
 <p>넘파이 배열의 타입은 <code>ndarray</code>입니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:615,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1678171163051,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="293d7642-a9e6-4fe0-e8f6-27ae3a67d04d" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(np.zeros((<span class="dv">3</span>,<span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -315,8 +315,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="np.ones" class="level2">
-<h2 class="anchored" data-anchor-id="np.ones"><code>np.ones</code></h2>
+<section id="np.ones" class="level3">
+<h3 class="anchored" data-anchor-id="np.ones"><code>np.ones</code></h3>
 <p><code>ndarray</code>를 만들 수 있는 넘파이 함수가 많습니다.</p>
 <p>다음은 1로 채워진 <span class="math inline">\(3 \times 4\)</span> 크기의 행렬입니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:779,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633324492423,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="95ab7176-1a8c-498f-feea-fba89092b7ff" data-execution_count="14">
@@ -328,8 +328,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="np.full" class="level2">
-<h2 class="anchored" data-anchor-id="np.full"><code>np.full</code></h2>
+<section id="np.full" class="level3">
+<h3 class="anchored" data-anchor-id="np.full"><code>np.full</code></h3>
 <p>주어진 값으로 지정된 크기의 배열을 초기화합니다. 다음은 <code>π</code>로 채워진 <span class="math inline">\(3 \times 4\)</span> 크기의 행렬입니다.</p>
 <div class="cell" data-outputid="e02e1c63-24eb-4e2b-91ba-da85281e801b" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.full((<span class="dv">3</span>,<span class="dv">4</span>), np.pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -340,8 +340,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="np.empty" class="level2">
-<h2 class="anchored" data-anchor-id="np.empty"><code>np.empty</code></h2>
+<section id="np.empty" class="level3">
+<h3 class="anchored" data-anchor-id="np.empty"><code>np.empty</code></h3>
 <p>초기화되지 않은 <span class="math inline">\(2 \times 3\)</span> 크기의 배열을 만듭니다(배열의 내용은 예측이 불가능하며 메모리 상황에 따라 달라집니다):</p>
 <div class="cell" data-outputid="72f17e9f-22bc-4e5c-aa6c-08d15d8f5a50" data-scrolled="true" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.empty((<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -351,8 +351,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="np.array" class="level2">
-<h2 class="anchored" data-anchor-id="np.array">np.array</h2>
+<section id="np.array" class="level3">
+<h3 class="anchored" data-anchor-id="np.array">np.array</h3>
 <p><code>array</code> 함수는 파이썬 리스트를 사용하여 <code>ndarray</code>를 초기화합니다:</p>
 <div class="cell" data-outputid="83226f2a-ed8c-4a0d-da21-eedb4a23874c" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>], [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -362,8 +362,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="np.arange" class="level2">
-<h2 class="anchored" data-anchor-id="np.arange"><code>np.arange</code></h2>
+<section id="np.arange" class="level3">
+<h3 class="anchored" data-anchor-id="np.arange"><code>np.arange</code></h3>
 <p>파이썬의 기본 <code>range</code> 함수와 비슷한 넘파이 <code>arange</code> 함수를 사용하여 <code>ndarray</code>를 만들 수 있습니다:</p>
 <div class="cell" data-outputid="6cb6f07c-52af-44c7-d41a-072458f621e3" data-scrolled="true" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>np.arange(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,8 +434,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </div>
 </section>
-<section id="np.linspace" class="level2">
-<h2 class="anchored" data-anchor-id="np.linspace"><code>np.linspace</code></h2>
+<section id="np.linspace" class="level3">
+<h3 class="anchored" data-anchor-id="np.linspace"><code>np.linspace</code></h3>
 <p>이런 이유로 부동 소수를 사용할 땐 <code>arange</code> 대신에 <code>linspace</code> 함수를 사용하는 것이 좋습니다. <code>linspace</code> 함수는 지정된 개수만큼 두 값 사이를 나눈 배열을 반환합니다(<code>arange</code>와는 다르게 최댓값이 <strong>포함</strong>됩니다):</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:328,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1678171613639,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="817971df-892c-47bd-ec6c-9260cd3f83d9" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linspace(<span class="dv">0</span>, <span class="dv">5</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -444,8 +444,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </div>
 </section>
-<section id="np.rand와-np.randn" class="level2">
-<h2 class="anchored" data-anchor-id="np.rand와-np.randn"><code>np.rand</code>와 <code>np.randn</code></h2>
+<section id="np.rand와-np.randn" class="level3">
+<h3 class="anchored" data-anchor-id="np.rand와-np.randn"><code>np.rand</code>와 <code>np.randn</code></h3>
 <p>넘파이의 <code>random</code> 모듈에는 <code>ndarray</code>를 랜덤한 값으로 초기화할 수 있는 함수들이 많이 있습니다. 예를 들어, 다음은 (균등 분포인) 0과 1사이의 랜덤한 부동 소수로 <span class="math inline">\(3 \times 4\)</span> 행렬을 초기화합니다:</p>
 <div class="cell" data-outputid="5212a761-a650-4fff-fad3-fe639639c552" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>np.random.rand(<span class="dv">3</span>,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -483,8 +483,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </div>
 </section>
-<section id="np.fromfunction" class="level2">
-<h2 class="anchored" data-anchor-id="np.fromfunction">np.fromfunction</h2>
+<section id="np.fromfunction" class="level3">
+<h3 class="anchored" data-anchor-id="np.fromfunction">np.fromfunction</h3>
 <p>함수를 사용하여 <code>ndarray</code>를 초기화할 수도 있습니다:</p>
 <div class="cell" data-outputid="4520cb28-963e-4d1a-db31-01e02f59ca76" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function(z, y, x):</span>
@@ -514,10 +514,10 @@ Wall time: 1.66 s</code></pre>
 <p>위의 식 <code>x + 10 * y + 100 * z</code>에서 <code>x</code>, <code>y</code>, <code>z</code>는 사실 <code>ndarray</code>입니다(배열의 산술 연산에 대해서는 아래에서 설명합니다). 중요한 점은 함수 <code>my_function</code>이 원소마다 호출되는 것이 아니고 딱 <strong>한 번</strong> 호출된다는 점입니다. 그래서 매우 효율적으로 초기화할 수 있습니다.</p>
 </section>
 </section>
-<section id="배열-데이터" class="level1">
-<h1>배열 데이터</h1>
-<section id="dtype" class="level2">
-<h2 class="anchored" data-anchor-id="dtype"><code>dtype</code></h2>
+<section id="배열-데이터" class="level2">
+<h2 class="anchored" data-anchor-id="배열-데이터">배열 데이터</h2>
+<section id="dtype" class="level3">
+<h3 class="anchored" data-anchor-id="dtype"><code>dtype</code></h3>
 <p>넘파이의 <code>ndarray</code>는 모든 원소가 동일한 타입(보통 숫자)을 가지기 때문에 효율적입니다. <code>dtype</code> 속성으로 쉽게 데이터 타입을 확인할 수 있습니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:444,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633325655719,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="a6d39949-ff4a-404f-9c5d-5156f0e8be88" data-scrolled="true" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">5</span>)</span>
@@ -543,8 +543,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 <p>가능한 데이터 타입은 <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>|<code>16</code>|<code>32</code>|<code>64</code>, <code>float16</code>|<code>32</code>|<code>64</code>, <code>complex64</code>|<code>128</code>가 있습니다. 전체 리스트는 <a href="http://docs.scipy.org/doc/numpy/user/basics.types.html">온라인 문서</a>를 참고하세요.</p>
 </section>
-<section id="itemsize" class="level2">
-<h2 class="anchored" data-anchor-id="itemsize"><code>itemsize</code></h2>
+<section id="itemsize" class="level3">
+<h3 class="anchored" data-anchor-id="itemsize"><code>itemsize</code></h3>
 <p><code>itemsize</code> 속성은 각 아이템의 크기(바이트)를 반환합니다:</p>
 <div class="cell" data-outputid="e62be970-e82f-43d2-efce-17f5ccb56cf1" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">5</span>, dtype<span class="op">=</span>np.complex64)</span>
@@ -554,8 +554,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </div>
 </section>
-<section id="data-버퍼" class="level2">
-<h2 class="anchored" data-anchor-id="data-버퍼"><code>data</code> 버퍼</h2>
+<section id="data-버퍼" class="level3">
+<h3 class="anchored" data-anchor-id="data-버퍼"><code>data</code> 버퍼</h3>
 <p>배열의 데이터는 1차원 바이트 버퍼로 메모리에 저장됩니다. <code>data</code> 속성을 사용해 참조할 수 있습니다(사용할 일은 거의 없겠지만요).</p>
 <div class="cell" data-outputid="30adfdc5-ae0d-421e-80d2-6745d53c78dc" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>],[<span class="dv">1000</span>, <span class="dv">2000</span>]], dtype<span class="op">=</span>np.int32)</span>
@@ -579,10 +579,10 @@ Wall time: 1.66 s</code></pre>
 <p>여러 개의 <code>ndarray</code>가 데이터 버퍼를 공유할 수 있습니다. 하나를 수정하면 다른 것도 바뀝니다. 잠시 후에 예를 살펴 보겠습니다.</p>
 </section>
 </section>
-<section id="배열-크기-변경" class="level1">
-<h1>배열 크기 변경</h1>
-<section id="자신을-변경" class="level2">
-<h2 class="anchored" data-anchor-id="자신을-변경">자신을 변경</h2>
+<section id="배열-크기-변경" class="level2">
+<h2 class="anchored" data-anchor-id="배열-크기-변경">배열 크기 변경</h2>
+<section id="자신을-변경" class="level3">
+<h3 class="anchored" data-anchor-id="자신을-변경">자신을 변경</h3>
 <p><code>ndarray</code>의 <code>shape</code> 속성을 지정하면 간단히 크기를 바꿀 수 있습니다. 배열의 원소 개수는 동일하게 유지됩니다.</p>
 <div class="cell" data-outputid="d871639e-ad6e-4218-8413-4a7d18bf968b" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> np.arange(<span class="dv">24</span>)</span>
@@ -635,8 +635,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </div>
 </section>
-<section id="reshape" class="level2">
-<h2 class="anchored" data-anchor-id="reshape"><code>reshape</code></h2>
+<section id="reshape" class="level3">
+<h3 class="anchored" data-anchor-id="reshape"><code>reshape</code></h3>
 <p><code>reshape</code> 함수는 동일한 데이터를 가리키는 새로운 <code>ndarray</code> 객체를 반환합니다. 한 배열을 수정하면 다른 것도 함께 바뀝니다.</p>
 <div class="cell" data-outputid="d6ef5ee8-7598-4959-a54f-dea4032f7e25" data-scrolled="true" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> g.reshape(<span class="dv">4</span>,<span class="dv">6</span>)</span>
@@ -690,8 +690,8 @@ Wall time: 1.66 s</code></pre>
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> g.copy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="ravel" class="level2">
-<h2 class="anchored" data-anchor-id="ravel"><code>ravel</code></h2>
+<section id="ravel" class="level3">
+<h3 class="anchored" data-anchor-id="ravel"><code>ravel</code></h3>
 <p>마지막으로 <code>ravel</code> 함수는 동일한 데이터를 가리키는 새로운 1차원 <code>ndarray</code>를 반환합니다:</p>
 <div class="cell" data-outputid="c53be7f6-8225-466e-8dee-eeef7eb1be3c" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>g.ravel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -702,8 +702,8 @@ Wall time: 1.66 s</code></pre>
 </div>
 </section>
 </section>
-<section id="산술-연산" class="level1">
-<h1>산술 연산</h1>
+<section id="산술-연산" class="level2">
+<h2 class="anchored" data-anchor-id="산술-연산">산술 연산</h2>
 <p>일반적인 산술 연산자(<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>**</code> 등)는 모두 <code>ndarray</code>와 사용할 수 있습니다. 이 연산자는 원소별로 적용됩니다:</p>
 <div class="cell" data-outputid="81bc44c0-dea0-4022-dd5d-9164bf246997" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">14</span>, <span class="dv">23</span>, <span class="dv">32</span>, <span class="dv">41</span>])</span>
@@ -734,11 +734,11 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 <p>여기 곱셈은 행렬 곱셈이 아닙니다. 행렬 연산은 아래에서 설명합니다.</p>
 <p>배열의 크기는 같아야 합니다. 그렇지 않으면 넘파이가 브로드캐스팅 규칙을 적용합니다.</p>
 </section>
-<section id="브로드캐스팅" class="level1">
-<h1>브로드캐스팅</h1>
+<section id="브로드캐스팅" class="level2">
+<h2 class="anchored" data-anchor-id="브로드캐스팅">브로드캐스팅</h2>
 <p>일반적으로 넘파이는 동일한 크기의 배열을 기대합니다. 그렇지 않은 상황에는 브로드캐스팅 규칙을 적용합니다:</p>
-<section id="규칙-1" class="level2">
-<h2 class="anchored" data-anchor-id="규칙-1">규칙 1</h2>
+<section id="규칙-1" class="level3">
+<h3 class="anchored" data-anchor-id="규칙-1">규칙 1</h3>
 <p>배열의 랭크가 동일하지 않으면 랭크가 맞을 때까지 랭크가 작은 배열 앞에 1을 추가합니다.</p>
 <div class="cell" data-outputid="51db0f5f-2476-4525-eebb-c2e1918b977f" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> np.arange(<span class="dv">5</span>).reshape(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
@@ -755,8 +755,8 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 </div>
 </div>
 </section>
-<section id="규칙-2" class="level2">
-<h2 class="anchored" data-anchor-id="규칙-2">규칙 2</h2>
+<section id="규칙-2" class="level3">
+<h3 class="anchored" data-anchor-id="규칙-2">규칙 2</h3>
 <p>특정 차원이 1인 배열은 그 차원에서 크기가 가장 큰 배열의 크기에 맞춰 동작합니다. 배열의 원소가 차원을 따라 반복됩니다.</p>
 <div class="cell" data-outputid="35bb7e32-f3e9-49cb-c127-259e783071ab" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> np.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>)</span>
@@ -838,8 +838,8 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 </div>
 </div>
 </section>
-<section id="규칙-3" class="level2">
-<h2 class="anchored" data-anchor-id="규칙-3">규칙 3</h2>
+<section id="규칙-3" class="level3">
+<h3 class="anchored" data-anchor-id="규칙-3">규칙 3</h3>
 <p>규칙 1 &amp; 2을 적용했을 때 모든 배열의 크기가 맞아야 합니다.</p>
 <div class="cell" data-outputid="e7a341d6-4736-4487-c555-8b82316783ad">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -882,8 +882,8 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 </div>
 </div>
 </section>
-<section id="업캐스팅" class="level2">
-<h2 class="anchored" data-anchor-id="업캐스팅">업캐스팅</h2>
+<section id="업캐스팅" class="level3">
+<h3 class="anchored" data-anchor-id="업캐스팅">업캐스팅</h3>
 <p><code>dtype</code>이 다른 배열을 합칠 때 넘파이는 (실제 값에 상관없이) 모든 값을 다룰 수 있는 타입으로 업캐스팅합니다.</p>
 <div class="cell" data-outputid="3c80e710-b5c8-4ff0-b904-fa959224f6dc">
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>k1 <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">5</span>, dtype<span class="op">=</span>np.uint8)</span>
@@ -909,8 +909,8 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 </div>
 </section>
 </section>
-<section id="조건-연산자" class="level1">
-<h1>조건 연산자</h1>
+<section id="조건-연산자" class="level2">
+<h2 class="anchored" data-anchor-id="조건-연산자">조건 연산자</h2>
 <p>조건 연산자도 원소별로 적용됩니다:</p>
 <div class="cell" data-outputid="0546d38b-d344-404c-e56f-4a4728c6ecad">
 <div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">40</span>])</span>
@@ -934,11 +934,11 @@ a ** b = [537824 279841  32768   1681]</code></pre>
 </div>
 </div>
 </section>
-<section id="수학-함수와-통계-함수" class="level1">
-<h1>수학 함수와 통계 함수</h1>
+<section id="수학-함수와-통계-함수" class="level2">
+<h2 class="anchored" data-anchor-id="수학-함수와-통계-함수">수학 함수와 통계 함수</h2>
 <p><code>ndarray</code>에서 사용할 수 있는 수학 함수와 통계 함수가 많습니다.</p>
-<section id="ndarray-메서드" class="level2">
-<h2 class="anchored" data-anchor-id="ndarray-메서드"><code>ndarray</code> 메서드</h2>
+<section id="ndarray-메서드" class="level3">
+<h3 class="anchored" data-anchor-id="ndarray-메서드"><code>ndarray</code> 메서드</h3>
 <p>일부 함수는 <code>ndarray</code> 메서드로 제공됩니다. 예를 들면:</p>
 <div class="cell" data-outputid="78a268db-f453-4f4e-e7e3-899603d5837f" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb132"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">3.1</span>, <span class="dv">7</span>], [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
@@ -1026,8 +1026,8 @@ var = 25.855555555555554</code></pre>
 </div>
 </div>
 </section>
-<section id="일반-함수" class="level2">
-<h2 class="anchored" data-anchor-id="일반-함수">일반 함수</h2>
+<section id="일반-함수" class="level3">
+<h3 class="anchored" data-anchor-id="일반-함수">일반 함수</h3>
 <p>넘파이는 일반 함수(universal function) 또는 <strong>ufunc</strong>라고 부르는 원소별 함수를 제공합니다. 예를 들면 <code>square</code> 함수는 원본 <code>ndarray</code>를 복사하여 각 원소를 제곱한 새로운 <code>ndarray</code> 객체를 반환합니다:</p>
 <div class="cell" data-outputid="fe881a00-5bea-4830-c0d3-2a513d594908">
 <div class="sourceCode cell-code" id="cb150"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">3.1</span>, <span class="dv">7</span>], [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
@@ -1094,8 +1094,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="이항-일반-함수" class="level2">
-<h2 class="anchored" data-anchor-id="이항-일반-함수">이항 일반 함수</h2>
+<section id="이항-일반-함수" class="level3">
+<h3 class="anchored" data-anchor-id="이항-일반-함수">이항 일반 함수</h3>
 <p>두 개의 <code>ndarray</code>에 원소별로 적용되는 이항 함수도 많습니다. 두 배열이 동일한 크기가 아니면 브로드캐스팅 규칙이 적용됩니다:</p>
 <div class="cell" data-outputid="00c6fd50-49e7-4012-c814-fee289631bea">
 <div class="sourceCode cell-code" id="cb155"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
@@ -1125,10 +1125,10 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </section>
 </section>
-<section id="배열-인덱싱" class="level1">
-<h1>배열 인덱싱</h1>
-<section id="차원-배열" class="level2">
-<h2 class="anchored" data-anchor-id="차원-배열">1차원 배열</h2>
+<section id="배열-인덱싱" class="level2">
+<h2 class="anchored" data-anchor-id="배열-인덱싱">배열 인덱싱</h2>
+<section id="차원-배열" class="level3">
+<h3 class="anchored" data-anchor-id="차원-배열">1차원 배열</h3>
 <p>1차원 넘파이 배열은 보통의 파이썬 배열과 비슷하게 사용할 수 있습니다:</p>
 <div class="cell" data-outputid="16e9e96d-6c49-43e1-a7e3-68043b91576e" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">19</span>, <span class="dv">13</span>, <span class="dv">7</span>, <span class="dv">3</span>])</span>
@@ -1184,8 +1184,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="보통의-파이썬-배열과-차이점" class="level2">
-<h2 class="anchored" data-anchor-id="보통의-파이썬-배열과-차이점">보통의 파이썬 배열과 차이점</h2>
+<section id="보통의-파이썬-배열과-차이점" class="level3">
+<h3 class="anchored" data-anchor-id="보통의-파이썬-배열과-차이점">보통의 파이썬 배열과 차이점</h3>
 <p>보통의 파이썬 배열과 대조적으로 <code>ndarray</code> 슬라이싱에 하나의 값을 할당하면 슬라이싱 전체에 복사됩니다. 위에서 언급한 브로드캐스팅 덕택입니다.</p>
 <div class="cell" data-outputid="bc23bb17-aeb6-4a0d-e3ed-e110e0897939" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>:<span class="dv">5</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
@@ -1264,8 +1264,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="다차원-배열" class="level2">
-<h2 class="anchored" data-anchor-id="다차원-배열">다차원 배열</h2>
+<section id="다차원-배열" class="level3">
+<h3 class="anchored" data-anchor-id="다차원-배열">다차원 배열</h3>
 <p>다차원 배열은 비슷한 방식으로 각 축을 따라 인덱싱 또는 슬라이싱해서 사용합니다. 콤마로 구분합니다:</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb197"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1325,8 +1325,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 <p>첫 번째 표현식은 <code>(12,)</code> 크기인 1D 배열로 행이 하나입니다. 두 번째는 <code>(1, 12)</code> 크기인 2D 배열로 같은 행을 반환합니다.</p>
 </section>
-<section id="팬시-인덱싱fancy-indexing" class="level2">
-<h2 class="anchored" data-anchor-id="팬시-인덱싱fancy-indexing">팬시 인덱싱(Fancy indexing)</h2>
+<section id="팬시-인덱싱fancy-indexing" class="level3">
+<h3 class="anchored" data-anchor-id="팬시-인덱싱fancy-indexing">팬시 인덱싱(Fancy indexing)</h3>
 <p>관심 대상의 인덱스 리스트를 지정할 수도 있습니다. 이를 팬시 인덱싱이라고 부릅니다.</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb214"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb214-1"><a href="#cb214-1" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1417,8 +1417,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="고차원" class="level2">
-<h2 class="anchored" data-anchor-id="고차원">고차원</h2>
+<section id="고차원" class="level3">
+<h3 class="anchored" data-anchor-id="고차원">고차원</h3>
 <p>고차원에서도 동일한 방식이 적용됩니다. 몇 가지 예를 살펴 보겠습니다:</p>
 <div class="cell" data-outputid="053bb96f-ba56-46fe-beb7-694cb8f281e1" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb237"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb237-1"><a href="#cb237-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> b.reshape(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>)</span>
@@ -1457,8 +1457,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="생략-부호-..." class="level2">
-<h2 class="anchored" data-anchor-id="생략-부호-...">생략 부호 (<code>...</code>)</h2>
+<section id="생략-부호-..." class="level3">
+<h3 class="anchored" data-anchor-id="생략-부호-...">생략 부호 (<code>...</code>)</h3>
 <p>생략 부호(<code>...</code>)를 쓰면 모든 지정하지 않은 축의 원소를 포함합니다.</p>
 <div class="cell" data-outputid="cfc05bbb-65b5-47c7-c331-14ea926af8d7" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb245"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a>c[<span class="dv">2</span>, ...]  <span class="co">#  행렬 2, 모든 행, 모든 열. c[2, :, :]와 동일</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1489,8 +1489,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="불리언-인덱싱" class="level2">
-<h2 class="anchored" data-anchor-id="불리언-인덱싱">불리언 인덱싱</h2>
+<section id="불리언-인덱싱" class="level3">
+<h3 class="anchored" data-anchor-id="불리언-인덱싱">불리언 인덱싱</h3>
 <p>불리언 값을 가진 <code>ndarray</code>를 사용해 축의 인덱스를 지정할 수 있습니다.</p>
 <div class="cell" data-outputid="51067425-5ae4-4a1f-cfa1-3f2aa4218514" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb253"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.arange(<span class="dv">48</span>).reshape(<span class="dv">4</span>, <span class="dv">12</span>)</span>
@@ -1521,8 +1521,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="np.ix_" class="level2">
-<h2 class="anchored" data-anchor-id="np.ix_"><code>np.ix_</code></h2>
+<section id="np.ix_" class="level3">
+<h3 class="anchored" data-anchor-id="np.ix_"><code>np.ix_</code></h3>
 <p>여러 축에 걸쳐서는 불리언 인덱싱을 사용할 수 없고 <code>ix_</code> 함수를 사용합니다:</p>
 <div class="cell" data-outputid="b1aadb48-0423-4dc5-de0a-2f494f7fe570" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb259"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a>b[np.ix_((<span class="dv">0</span>,<span class="dv">2</span>),(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">10</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1561,8 +1561,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </section>
 </section>
-<section id="반복" class="level1">
-<h1>반복</h1>
+<section id="반복" class="level2">
+<h2 class="anchored" data-anchor-id="반복">반복</h2>
 <p><code>ndarray</code>를 반복하는 것은 일반적인 파이썬 배열을 반복한는 것과 매우 유사합니다. 다차원 배열을 반복하면 첫 번째 축에 대해서 수행됩니다.</p>
 <div class="cell" data-outputid="9ee9dd9c-3b24-4a01-9e29-d14e9604a0e9" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb269"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb269-1"><a href="#cb269-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.arange(<span class="dv">24</span>).reshape(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)  <span class="co"># 3D 배열 (두 개의 3x4 행렬로 구성됨)</span></span>
@@ -1639,8 +1639,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="배열-쌓기" class="level1">
-<h1>배열 쌓기</h1>
+<section id="배열-쌓기" class="level2">
+<h2 class="anchored" data-anchor-id="배열-쌓기">배열 쌓기</h2>
 <p>종종 다른 배열을 쌓아야 할 때가 있습니다. 넘파이는 이를 위해 몇 개의 함수를 제공합니다. 먼저 배열 몇 개를 만들어 보죠.</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:1340,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633325750456,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="2553528f-b921-49f0-afc7-6c6643138897" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb277"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb277-1"><a href="#cb277-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> np.full((<span class="dv">3</span>,<span class="dv">4</span>), <span class="fl">1.0</span>)</span>
@@ -1670,8 +1670,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
        [3., 3., 3., 3.]])</code></pre>
 </div>
 </div>
-<section id="vstack" class="level2">
-<h2 class="anchored" data-anchor-id="vstack"><code>vstack</code></h2>
+<section id="vstack" class="level3">
+<h3 class="anchored" data-anchor-id="vstack"><code>vstack</code></h3>
 <p><code>vstack</code> 함수를 사용하여 수직으로 쌓아보죠:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:692,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633325764136,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="1f874162-3d05-495e-800c-0a8f2b5ed5ea">
 <div class="sourceCode cell-code" id="cb283"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb283-1"><a href="#cb283-1" aria-hidden="true" tabindex="-1"></a>q4 <span class="op">=</span> np.vstack((q1, q2, q3))</span>
@@ -1697,8 +1697,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 <p>q1, q2, q3가 모두 같은 크기이므로 가능합니다(수직으로 쌓기 때문에 수직 축은 크기가 달라도 됩니다).</p>
 </section>
-<section id="hstack" class="level2">
-<h2 class="anchored" data-anchor-id="hstack"><code>hstack</code></h2>
+<section id="hstack" class="level3">
+<h3 class="anchored" data-anchor-id="hstack"><code>hstack</code></h3>
 <p><code>hstack</code>을 사용해 수평으로도 쌓을 수 있습니다:</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:616,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633325774053,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="95ecfa89-5a2b-49cc-a539-0af18d51d30b">
 <div class="sourceCode cell-code" id="cb287"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb287-1"><a href="#cb287-1" aria-hidden="true" tabindex="-1"></a>q5 <span class="op">=</span> np.hstack((q1, q3))</span>
@@ -1726,8 +1726,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="concatenate" class="level2">
-<h2 class="anchored" data-anchor-id="concatenate"><code>concatenate</code></h2>
+<section id="concatenate" class="level3">
+<h3 class="anchored" data-anchor-id="concatenate"><code>concatenate</code></h3>
 <p><code>concatenate</code> 함수는 지정한 축으로도 배열을 쌓습니다.</p>
 <div class="cell" data-executioninfo="{&quot;elapsed&quot;:521,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1633325803964,&quot;user&quot;:{&quot;displayName&quot;:&quot;여지호&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a/default-user=s64&quot;,&quot;userId&quot;:&quot;14457112622888313085&quot;},&quot;user_tz&quot;:-540}" data-outputid="6a52022b-74d7-4aad-f05f-d3c2749d40c9">
 <div class="sourceCode cell-code" id="cb293"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb293-1"><a href="#cb293-1" aria-hidden="true" tabindex="-1"></a>q7 <span class="op">=</span> np.concatenate((q1, q2, q3), axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># vstack과 동일</span></span>
@@ -1771,8 +1771,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 <p>예상했겠지만 <code>hstack</code>은 <code>axis=1</code>으로 <code>concatenate</code>를 호출하는 것과 같습니다.</p>
 </section>
-<section id="stack" class="level2">
-<h2 class="anchored" data-anchor-id="stack"><code>stack</code></h2>
+<section id="stack" class="level3">
+<h3 class="anchored" data-anchor-id="stack"><code>stack</code></h3>
 <p><code>stack</code> 함수는 새로운 축을 따라 배열을 쌓습니다. 모든 배열은 같은 크기를 가져야 합니다.</p>
 <div class="cell" data-outputid="1a17e755-77b4-4d48-febf-5c3bc7644179" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb301"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb301-1"><a href="#cb301-1" aria-hidden="true" tabindex="-1"></a>q1.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1807,8 +1807,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </section>
 </section>
-<section id="배열-분할" class="level1">
-<h1>배열 분할</h1>
+<section id="배열-분할" class="level2">
+<h2 class="anchored" data-anchor-id="배열-분할">배열 분할</h2>
 <p>분할은 쌓기의 반대입니다. 예를 들어 <code>vsplit</code> 함수는 행렬을 수직으로 분할합니다.</p>
 <p>먼저 6x4 행렬을 만들어 보죠:</p>
 <div class="cell" data-outputid="e01f6c9a-51f0-4a03-e822-236c2a79683b">
@@ -1871,8 +1871,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="배열-전치" class="level1">
-<h1>배열 전치</h1>
+<section id="배열-전치" class="level2">
+<h2 class="anchored" data-anchor-id="배열-전치">배열 전치</h2>
 <p><code>transpose</code> 메서드는 주어진 순서대로 축을 뒤바꾸어 <code>ndarray</code> 데이터에 대한 새로운 뷰를 만듭니다.</p>
 <p>예를 위해 3D 배열을 만들어 보죠:</p>
 <div class="cell" data-outputid="b0df506f-766b-4ff0-b13a-12d4e616db78">
@@ -1978,11 +1978,11 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="선형-대수학" class="level1">
-<h1>선형 대수학</h1>
+<section id="선형-대수학" class="level2">
+<h2 class="anchored" data-anchor-id="선형-대수학">선형 대수학</h2>
 <p>넘파이 2D 배열을 사용하면 파이썬에서 행렬을 효율적으로 표현할 수 있습니다. 주요 행렬 연산을 간단히 둘러 보겠습니다. 선형 대수학, 벡터와 행렬에 관한 자세한 내용은 <a href="math_linear_algebra.ipynb">Linear Algebra tutorial</a>를 참고하세요.</p>
-<section id="행렬-전치" class="level2">
-<h2 class="anchored" data-anchor-id="행렬-전치">행렬 전치</h2>
+<section id="행렬-전치" class="level3">
+<h3 class="anchored" data-anchor-id="행렬-전치">행렬 전치</h3>
 <p><code>T</code> 속성은 랭크가 2보다 크거나 같을 때 <code>transpose()</code>를 호출하는 것과 같습니다:</p>
 <div class="cell" data-outputid="a8f842ed-85ac-43c9-fdcf-769b9e7098d0">
 <div class="sourceCode cell-code" id="cb339"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb339-1"><a href="#cb339-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> np.arange(<span class="dv">10</span>).reshape(<span class="dv">2</span>,<span class="dv">5</span>)</span>
@@ -2035,8 +2035,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="행렬-곱셈" class="level2">
-<h2 class="anchored" data-anchor-id="행렬-곱셈">행렬 곱셈</h2>
+<section id="행렬-곱셈" class="level3">
+<h3 class="anchored" data-anchor-id="행렬-곱셈">행렬 곱셈</h3>
 <p>두 개의 행렬을 만들어 <code>dot</code> 메서드로 행렬 <a href="https://ko.wikipedia.org/wiki/%ED%96%89%EB%A0%AC_%EA%B3%B1%EC%85%88">곱셈</a>을 실행해 보죠.</p>
 <div class="cell" data-outputid="dc0e7eba-b97c-482d-cc9c-39c75340f7ac">
 <div class="sourceCode cell-code" id="cb351"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb351-1"><a href="#cb351-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="op">=</span> np.arange(<span class="dv">10</span>).reshape(<span class="dv">2</span>, <span class="dv">5</span>)</span>
@@ -2066,8 +2066,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 <p><strong>주의</strong>: 앞서 언급한 것처럼 <code>n1*n2</code>는 행렬 곱셈이 아니라 원소별 곱셈(또는 <a href="https://ko.wikipedia.org/wiki/%EC%95%84%EB%8B%A4%EB%A7%88%EB%A5%B4_%EA%B3%B1">아다마르 곱</a>이라 부릅니다)입니다.</p>
 </section>
-<section id="역행렬과-유사-역행렬" class="level2">
-<h2 class="anchored" data-anchor-id="역행렬과-유사-역행렬">역행렬과 유사 역행렬</h2>
+<section id="역행렬과-유사-역행렬" class="level3">
+<h3 class="anchored" data-anchor-id="역행렬과-유사-역행렬">역행렬과 유사 역행렬</h3>
 <p><code>numpy.linalg</code> 모듈 안에 많은 선형 대수 함수들이 있습니다. 특히 <code>inv</code> 함수는 정방 행렬의 역행렬을 계산합니다:</p>
 <div class="cell" data-outputid="17ed696f-2d67-4de0-cd9d-679bcbf86e80">
 <div class="sourceCode cell-code" id="cb357"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb357-1"><a href="#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> linalg</span>
@@ -2098,8 +2098,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="단위-행렬" class="level2">
-<h2 class="anchored" data-anchor-id="단위-행렬">단위 행렬</h2>
+<section id="단위-행렬" class="level3">
+<h3 class="anchored" data-anchor-id="단위-행렬">단위 행렬</h3>
 <p>행렬과 그 행렬의 역행렬을 곱하면 단위 행렬이 됩니다(작은 소숫점 오차가 있습니다):</p>
 <div class="cell" data-outputid="d6488784-2b7d-462f-9d6f-c68cddb3e94c">
 <div class="sourceCode cell-code" id="cb363"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb363-1"><a href="#cb363-1" aria-hidden="true" tabindex="-1"></a>m3.dot(linalg.inv(m3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2119,8 +2119,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="qr-분해" class="level2">
-<h2 class="anchored" data-anchor-id="qr-분해">QR 분해</h2>
+<section id="qr-분해" class="level3">
+<h3 class="anchored" data-anchor-id="qr-분해">QR 분해</h3>
 <p><code>qr</code> 함수는 행렬을 <a href="https://en.wikipedia.org/wiki/QR_decomposition">QR 분해</a>합니다:</p>
 <div class="cell" data-outputid="bde2973e-8be9-4a15-f353-71dd0309d53e">
 <div class="sourceCode cell-code" id="cb367"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb367-1"><a href="#cb367-1" aria-hidden="true" tabindex="-1"></a>q, r <span class="op">=</span> linalg.qr(m3)</span>
@@ -2148,8 +2148,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="행렬식" class="level2">
-<h2 class="anchored" data-anchor-id="행렬식">행렬식</h2>
+<section id="행렬식" class="level3">
+<h3 class="anchored" data-anchor-id="행렬식">행렬식</h3>
 <p><code>det</code> 함수는 <a href="https://en.wikipedia.org/wiki/Determinant">행렬식</a>을 계산합니다:</p>
 <div class="cell" data-outputid="4fe5038b-cfa9-4fd1-be2e-246900b9b004">
 <div class="sourceCode cell-code" id="cb373"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb373-1"><a href="#cb373-1" aria-hidden="true" tabindex="-1"></a>linalg.det(m3)  <span class="co"># 행렬식 계산</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2158,8 +2158,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="고윳값과-고유벡터" class="level2">
-<h2 class="anchored" data-anchor-id="고윳값과-고유벡터">고윳값과 고유벡터</h2>
+<section id="고윳값과-고유벡터" class="level3">
+<h3 class="anchored" data-anchor-id="고윳값과-고유벡터">고윳값과 고유벡터</h3>
 <p><code>eig</code> 함수는 정방 행렬의 <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">고윳값과 고유벡터</a>를 계산합니다:</p>
 <div class="cell" data-outputid="4595af27-d671-48ac-c501-45cd12b86916">
 <div class="sourceCode cell-code" id="cb375"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb375-1"><a href="#cb375-1" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> linalg.eig(m3)</span>
@@ -2185,8 +2185,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="특잇값-분해" class="level2">
-<h2 class="anchored" data-anchor-id="특잇값-분해">특잇값 분해</h2>
+<section id="특잇값-분해" class="level3">
+<h3 class="anchored" data-anchor-id="특잇값-분해">특잇값 분해</h3>
 <p><code>svd</code> 함수는 행렬을 입력으로 받아 그 행렬의 <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">특잇값 분해</a>를 반환합니다:</p>
 <div class="cell" data-outputid="7b8a941a-7ac5-4357-eabc-7318517b9ee8">
 <div class="sourceCode cell-code" id="cb381"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb381-1"><a href="#cb381-1" aria-hidden="true" tabindex="-1"></a>m4 <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>], [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>], [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>], [<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]])</span>
@@ -2246,8 +2246,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="대각원소와-대각합" class="level2">
-<h2 class="anchored" data-anchor-id="대각원소와-대각합">대각원소와 대각합</h2>
+<section id="대각원소와-대각합" class="level3">
+<h3 class="anchored" data-anchor-id="대각원소와-대각합">대각원소와 대각합</h3>
 <div class="cell" data-outputid="44b5e88c-d3c6-4af2-9a63-289057d9af70">
 <div class="sourceCode cell-code" id="cb393"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb393-1"><a href="#cb393-1" aria-hidden="true" tabindex="-1"></a>np.diag(m3)  <span class="co"># m3의 대각 원소입니다(왼쪽 위에서 오른쪽 아래)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="158">
@@ -2261,8 +2261,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="선형-방정식-풀기" class="level2">
-<h2 class="anchored" data-anchor-id="선형-방정식-풀기">선형 방정식 풀기</h2>
+<section id="선형-방정식-풀기" class="level3">
+<h3 class="anchored" data-anchor-id="선형-방정식-풀기">선형 방정식 풀기</h3>
 <p><code>solve</code> 함수는 다음과 같은 선형 방정식을 풉니다:</p>
 <ul>
 <li><span class="math inline">\(2x + 6y = 6\)</span></li>
@@ -2293,8 +2293,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </section>
 </section>
-<section id="벡터화" class="level1">
-<h1>벡터화</h1>
+<section id="벡터화" class="level2">
+<h2 class="anchored" data-anchor-id="벡터화">벡터화</h2>
 <p>한 번에 하나씩 개별 배열 원소에 대해 연산을 실행하는 대신 배열 연산을 사용하면 훨씬 효율적인 코드를 만들 수 있습니다. 이를 벡터화라고 합니다. 이를 사용하여 넘파이의 최적화된 성능을 활용할 수 있습니다.</p>
 <p>예를 들어, <span class="math inline">\(sin(xy/40.5)\)</span> 식을 기반으로 768x1024 크기 배열을 생성하려고 합니다. 중첩 반복문 안에 파이썬의 math 함수를 사용하는 것은 <strong>나쁜</strong> 방법입니다:</p>
 <div class="cell">
@@ -2367,11 +2367,11 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="저장과-로딩" class="level1">
-<h1>저장과 로딩</h1>
+<section id="저장과-로딩" class="level2">
+<h2 class="anchored" data-anchor-id="저장과-로딩">저장과 로딩</h2>
 <p>넘파이는 <code>ndarray</code>를 바이너리 또는 텍스트 포맷으로 손쉽게 저장하고 로드할 수 있습니다.</p>
-<section id="바이너리-.npy-포맷" class="level2">
-<h2 class="anchored" data-anchor-id="바이너리-.npy-포맷">바이너리 <code>.npy</code> 포맷</h2>
+<section id="바이너리-.npy-포맷" class="level3">
+<h3 class="anchored" data-anchor-id="바이너리-.npy-포맷">바이너리 <code>.npy</code> 포맷</h3>
 <p>랜덤 배열을 만들고 저장해 보죠.</p>
 <div class="cell" data-outputid="f4af9a53-3eb1-4698-eb47-6b783953557c" data-scrolled="true" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb416"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb416-1"><a href="#cb416-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.random.rand(<span class="dv">2</span>,<span class="dv">3</span>)</span>
@@ -2404,8 +2404,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="텍스트-포맷" class="level2">
-<h2 class="anchored" data-anchor-id="텍스트-포맷">텍스트 포맷</h2>
+<section id="텍스트-포맷" class="level3">
+<h3 class="anchored" data-anchor-id="텍스트-포맷">텍스트 포맷</h3>
 <p>배열을 텍스트 포맷으로 저장해 보죠:</p>
 <div class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb423"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb423-1"><a href="#cb423-1" aria-hidden="true" tabindex="-1"></a>np.savetxt(<span class="st">"my_array.csv"</span>, a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2434,8 +2434,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </div>
 </section>
-<section id="압축된-.npz-포맷" class="level2">
-<h2 class="anchored" data-anchor-id="압축된-.npz-포맷">압축된 <code>.npz</code> 포맷</h2>
+<section id="압축된-.npz-포맷" class="level3">
+<h3 class="anchored" data-anchor-id="압축된-.npz-포맷">압축된 <code>.npz</code> 포맷</h3>
 <p>여러 개의 배열을 압축된 한 파일로 저장하는 것도 가능합니다:</p>
 <div class="cell" data-outputid="cc93ffa4-082e-4be7-9298-1cb87c425faf" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb429"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb429-1"><a href="#cb429-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.arange(<span class="dv">24</span>, dtype<span class="op">=</span>np.uint8).reshape(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
@@ -2487,8 +2487,8 @@ C:\Users\choiw\AppData\Local\Temp\ipykernel_11288\4103705789.py:5: RuntimeWarnin
 </div>
 </section>
 </section>
-<section id="그-다음은" class="level1">
-<h1>그 다음은?</h1>
+<section id="그-다음은" class="level2">
+<h2 class="anchored" data-anchor-id="그-다음은">그 다음은?</h2>
 <p>넘파이 기본 요소를 모두 배웠지만 훨씬 더 많은 기능이 있습니다. 이를 배우는 가장 좋은 방법은 넘파이를 직접 실습해 보고 훌륭한 <a href="http://docs.scipy.org/doc/numpy/reference/index.html">넘파이 문서</a>에서 필요한 함수와 기능을 찾아 보세요.</p>
 
 
