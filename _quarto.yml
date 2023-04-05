@@ -5,8 +5,9 @@ project:
 website:
   title: "1_wjc"
   navbar:
-    right:
+    left:
       - about.qmd
+    right:
       - icon: github
         href: https://github.com/
 format:

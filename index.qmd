@@ -1,10 +1,10 @@
 ---
-title: "Data Analyze blog"
+title: "Data Science blog"
 listing:
   contents: posts
   sort: "date desc"
   type: default
-  fields: [image, date, title, categories, author]
+  fields: [date, title, categories, author]
   categories: true
   sort-ui: true
   filter-ui: true
