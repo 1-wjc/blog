@@ -52,5 +52,8 @@
   },
   "posts/Pandas/pandas.ipynb": {
     "pandas.html": "5f466165"
+  },
+  "posts/Numpy/numpy.ipynb": {
+    "numpy.html": "b2cae026"
   }
 }
